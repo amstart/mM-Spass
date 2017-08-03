@@ -2,38 +2,30 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Processor {
-    public static String saveFile(String inputString, File file) throws IOException {
-        FileWriter outputStream = null;
-        try {
-            outputStream = new FileWriter(file.getPath() + "processed_" + file.getName());
+    public static String processFile(File file) throws IOException {
+        BufferedReader inputStream = null;
+        PrintWriter outputStream = null;
 
-            for(int i=0; i<inputString.length()-1; i++){
-                outputStream.write(inputString.charAt(i));
+        String filePath = file.getAbsolutePath().
+                substring(0,file.getAbsolutePath().lastIndexOf(File.separator))
+                + File.separator + "processed_" + file.getName();
+
+        try {
+            inputStream = new BufferedReader(new FileReader(file.getAbsolutePath()));
+            outputStream = new PrintWriter(new FileWriter(filePath));
+
+            String l;
+            while ((l = inputStream.readLine()) != null) {
+                outputStream.println(l);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
             if (outputStream != null) {
                 outputStream.close();
             }
         }
-        return "saved: " + inputString;
-    }
-
-    public static String readFile(File file) {
-        String outputString = "in and out: ";
-        try(Scanner in = new Scanner(new FileReader(file.getAbsolutePath()));) {
-            StringBuilder sb = new StringBuilder();
-            while(in.hasNext()) {
-                sb.append(in.next());
-            }
-            in.close();
-            outputString = sb.toString();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return outputString;
+        return "saved: " + filePath;
     }
 }
