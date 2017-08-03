@@ -13,9 +13,9 @@ public class mMTask {
             System.out.println("Open command cancelled by user.");
         } else {
             File file = fc.getSelectedFile();
-            //This is where a real application would open the file.
             System.out.println("Opening: " + file.getAbsolutePath() + ".");
-            outputString = TextProcessor.processText("hallo");
+            fileString = Processor.readFile(file.getAbsolutePath());
+            outputString = Processor.processText(fileString);
             System.out.println(outputString);
         }
     }

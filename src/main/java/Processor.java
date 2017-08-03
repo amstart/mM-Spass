@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Processor {
     public static String processText(String inputString) {
@@ -6,18 +7,15 @@ public class Processor {
         return outputString;
     }
 
-    public static String openFile(String absolutePath) {
+    public static String readFile(String absolutePath) {
         String outputString = "in and out: ";
-        try(BufferedReader br = new BufferedReader(new FileReader(absolutePath))) {
+        try(Scanner in = new Scanner(new FileReader(absolutePath));) {
             StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
+            while(in.hasNext()) {
+                sb.append(in.next());
             }
-            String everything = sb.toString();
+            in.close();
+            outputString = sb.toString();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
