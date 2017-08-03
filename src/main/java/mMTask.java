@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.io.*;
 public class mMTask {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         final JFileChooser fc;
         fc = new JFileChooser();
         String fileString = "", outputString = "";
@@ -14,8 +14,8 @@ public class mMTask {
         } else {
             File file = fc.getSelectedFile();
             System.out.println("Opening: " + file.getAbsolutePath() + ".");
-            fileString = Processor.readFile(file.getAbsolutePath());
-            outputString = Processor.processText(fileString);
+            fileString = Processor.readFile(file);
+            outputString = Processor.saveFile(fileString, file);
             System.out.println(outputString);
         }
     }
