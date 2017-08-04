@@ -10,13 +10,13 @@ import java.nio.file.Paths;
 
 public class TestUnit extends TestCase  {
     protected File infile;
-    String outfilePath = "/processed_test123.txt";
+    String outfilePath = "processed_test123.txt";
     protected String original = "Mama mia was soll das denn?";
     protected String processed = "maMa Mia was soll das denn?";
 
     @Before
     public void setUp() throws IOException {
-        infile = new File("/test123.txt");
+        infile = new File("test123.txt");
         PrintWriter outputStream = null;
         try {
             outputStream = new PrintWriter(new FileWriter(infile));
