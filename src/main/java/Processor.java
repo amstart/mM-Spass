@@ -16,7 +16,16 @@ public class Processor {
 
             String l;
             while ((l = inputStream.readLine()) != null) {
-                outputStream.println(l);
+                char[] ch = l.toCharArray();
+                for (int i=0; i<ch.length; i++) {
+                    if (ch[i] == 'm') {
+                        ch[i] = 'M';
+                    }
+                    else if (ch[i] == 'M') {
+                        ch[i] = 'm';
+                    }
+                }
+                outputStream.println(ch);
             }
         } finally {
             if (inputStream != null) {
